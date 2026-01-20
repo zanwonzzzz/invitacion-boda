@@ -6,6 +6,7 @@
 <title>Iram & Samantha</title>
 
 <style>
+  
 html, body {
   margin: 0;
   width: 100%;
@@ -13,6 +14,27 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+
+/* ===== TRANSICIÓN ENTRE SECCIONES ===== */
+section,
+.hero,
+.celebrate,
+.ubication,
+.day,
+.gifts,
+.confirmation,
+.waiting {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+/* Cuando la sección entra en pantalla */
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 /* ===== SECCIÓN 1 ===== */
 .hero {
@@ -106,26 +128,6 @@ html, body {
   
   margin-left: 120px;
     z-index: 20;
-}
-
-
-
-/* 📱 RESPONSIVE */
-@media (max-width: 768px) {
-  .names {
-    width: 130vw;
-    top: -22vh;
-  }
-
-  .date {
-    width: 80vw;
-    top: 46vh;
-  }
-
-  .countdown {
-    width: 85vw;
-    top: 62vh;
-  }
 }
 
 /* ===== SECCIÓN 2: CELEBRATE ===== */
@@ -430,7 +432,7 @@ html, body {
   display: grid;
   grid-template-columns: 1.2fr 1fr; /* Dividimos en dos columnas */
   align-items: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Contenedor del lado izquierdo (Textos y Botón) */
@@ -463,7 +465,7 @@ html, body {
 .boton-rsvp {
   width: 200%;
   max-width: 1000px;
-  margin-top: -1100px;
+  margin-top: -700px;
   margin-left: 40px;
   height: auto;
   cursor: pointer;
@@ -476,22 +478,117 @@ html, body {
 
 /* Imagen de las flores (Derecha) */
 .flores-confirmation {
-  width: 100%;
+  position: absolute;   /* 🔑 ya no depende del contenido */
+  right: 0;
+  bottom: 0;
+
+  width: 50%;
   height: 100%;
-  /* Eliminamos el margin-top negativo que las sacaba de la pantalla */
+
   background-image: url('{{ asset('flores.png') }}');
-  
-  /* 'cover' hará que las flores se vean grandes y llenen su mitad de la sección */
-  background-size: cover; 
-  
-  /* Las anclamos a la derecha y abajo */
-  background-position: right bottom; 
+  background-size: cover;
+  background-position: right bottom;
   background-repeat: no-repeat;
-  margin-top: -450px;
-  
-  /* Esto asegura que se mantengan en su columna del grid */
-  grid-column: 2;
 }
+/* ===== FORM RSVP ===== */
+#rsvpForm {
+  position: absolute;
+  top: 50%;
+  left: 200px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 360px;
+  background: rgba(255,255,255,0.95);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+
+/* Select y input */
+#rsvpForm select,
+#rsvpForm input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 16px;
+  font-family: 'Georgia', serif;
+  border-radius: 10px;
+  border: 1px solid #cfcfcf;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  transition: all 0.3s ease;
+
+  box-sizing: border-box;
+  height: 52px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  margin-bottom: 14px; /* 🔑 separación */
+}
+
+
+
+/* Focus elegante */
+#rsvpForm select:focus,
+#rsvpForm input:focus {
+  border-color: #b89b5e;
+  box-shadow: 0 0 0 2px rgba(184, 155, 94, 0.2);
+}
+
+/* Botones */
+#btnConfirmar,
+#btnNoAsistire {
+  padding: 14px;
+  font-size: 15px;
+  font-family: 'Georgia', serif;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Confirmar */
+#btnConfirmar {
+  background-color: #b89b5e;
+  color: #fff;
+}
+
+#btnConfirmar:hover {
+  background-color: #a4884f;
+  transform: translateY(-2px);
+}
+
+/* No asistir */
+#btnNoAsistire {
+  background-color: transparent;
+  color: #777;
+  border: 1px solid #bbb;
+}
+
+#btnNoAsistire:hover {
+  background-color: #f2f2f2;
+  color: #444;
+}
+
+/* Botones deshabilitados (anti-spam visual) */
+#btnConfirmar:disabled,
+#btnNoAsistire:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Input deshabilitado */
+#rsvpForm input:disabled,
+#rsvpForm select:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+}
+
 /* ===== SECCIÓN 7: WAITING ===== */
 .waiting {
   position: relative;
@@ -556,65 +653,44 @@ html, body {
   z-index: 30;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .waiting-footer {
-    flex-direction: column;
-    height: auto;
-    padding: 40px 20px;
+/*responsive */
+@media (min-width: 1024px) {
+  .hero,
+  .celebrate,
+  .day,
+  .gifts,
+  .confirmation,
+  .waiting {
+    min-height: 100vh;
   }
-  .waiting-left .te-esperamos-final,
-  .waiting-right .nombre-firma,
-  .waiting-right .contacto-img {
-    width: 280px;
-    margin: 10px 0;
+
+  /* RSVP */
+  #rsvpForm {
+    left: 200px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 
-/* Responsive para celulares */
-@media (max-width: 768px) {
-  .waiting-footer {
-    flex-direction: column;
-    text-align: center;
-    padding: 20px;
-    gap: 20px;
-  }
-  .waiting-left, .waiting-right {
-    align-items: center;
-  }
-}
+@media (max-width: 1023px) {
 
-/* Responsive para celulares */
-@media (max-width: 768px) {
-  .confirmation {
-    grid-template-columns: 1fr;
-    text-align: center;
+  /* ===== HERO ===== */
+  .names {
+    top: -40vh;
+    width: 130vw;
   }
-  .confirmation-content {
-    padding-left: 20px;
-    padding-right: 20px;
-    align-items: center;
+
+  .date,
+  .countdown {
+    left: 50%;
+    width: 90vw;
   }
-  .flores-confirmation {
-    display: none; /* Ocultamos flores en móvil para dar espacio al texto */
-  }
-}
 
-
-
-/* Móvil: Mantenemos los 3 iconos grandes y visibles */
-@media (max-width: 768px) {
-  .eventos-container { gap: 10px; }
-  .evento-icon { max-width: 90px !important; }
-  .evento-info { max-width: 110px !important; }
-  .day-title-img { max-width: 320px; }
-}
-/* Responsive */
-@media (max-width: 1024px) {
+  /* ===== CELEBRATE ===== */
   .celebrate {
     grid-template-columns: 1fr;
+    height: auto;
     padding: 40px;
-    gap: 30px;
   }
 
   .sobre,
@@ -622,50 +698,672 @@ html, body {
   .agradecimiento,
   .versiculo,
   .te-esperamos {
-    grid-column: 1;
-    justify-self: center;
+    width: 100%;
     margin: 0;
+    justify-self: center;
   }
 
-  .sobre {
-    grid-row: 1;
-    max-width: 400px;
-  }
-
-  .foto {
-    grid-row: 2;
-    max-width: 500px;
-  }
-
-  .agradecimiento {
-    grid-row: 3;
-    max-width: 300px;
-  }
-
-  .versiculo {
-    grid-row: 4;
-    max-width: 600px;
-  }
-
-  .te-esperamos {
-    grid-row: 5;
-    max-width: 350px;
-  }
-
+  /* ===== UBICACIÓN ===== */
   .ubication {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    height: auto;
   }
 
   .foto-propuesta {
-    height: 50vh;
+    width: 100%;
   }
 
-  .ubicacion-info {
-    padding: 40px;
+  .nh-quinta,
+  .nos-casaremos {
+    width: 100%;
+    left: 0;
+    top: 0;
+  }
+
+  .mapa-wrap {
+    margin-top: 40px;
+  }
+
+  /* ===== DAY ===== */
+  .eventos-container {
+    flex-direction: column;
+    gap: 60px;
+    margin-top: 0;
+  }
+
+  /* ===== GIFTS ===== */
+  .gifts {
+    grid-template-columns: 1fr;
+  }
+
+  .mesa-regalos-title {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  /* ===== CONFIRMATION ===== */
+  .confirmation {
+    grid-template-columns: 1fr;
+  }
+
+  .flores-confirmation {
+    width: 100%;
+    height: 40vh;
+    bottom: 0;
+  }
+
+  #rsvpForm {
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: none;
+    margin: 40px auto;
   }
 }
+
+/*celular */
+/* ================================
+   📱 MOBILE CSS LIMPIO Y REAL
+   ================================ */
+@media (max-width: 768px) {
+
+  section {
+    min-height: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  body {
+    overflow-y: auto !important;
+  }
+
+  /* ================= HERO ================= */
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  /* 🔥 IRAM & SAMANTHA */
+.names { 
+  position: relative !important;
+  top: -100px !important;
+  left: 0 !important;
+  transform: none !important;
+
+  width: 120%;
+  max-width: 420px;
+
+  margin: 0 auto 100px auto;
+
+  /* 👇 ESTA ES LA CLAVE */
+  translate: -20px 0;
+
+  display: block;
+  z-index: 15;
+}
+
+
+  /* 📅 FECHA */
+  .date {
+    display: block;
+
+    width: 360px;
+    max-width: 90vw;
+
+    /* 👇 mueve a la derecha */
+    margin-left: 60px;   /* prueba 15px – 30px */
+
+    position: relative !important;
+    left: 0 !important;
+    top: -400px ;
+    transform: none !important;
+
+    z-index: 14;
+  }
+
+  /* ⏳ COUNTDOWN */
+ .countdown {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+
+  transform: translateY(-200px); /* 👈 SUBE */
+  z-index: 20;
+}
+
+.countdown-wrapper {
+    position: relative;
+  }
+
+  .countdown-overlay {
+    position: relative;
+    transform: translateY(-200px); /* 👈 AQUÍ SÍ SUBE */
+    z-index: 20;
+  }
+
+
+  .countdown-title {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  #countdown {
+    font-size: 20px;
+    margin: 0;
+  }
+
+
+
+/* ================= CELEBRATE ================= */
+.celebrate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+
+  padding: 180px 30px 60px;
+  height: auto;
+
+  background-color: #eeede7;
+  background-image: url('{{ asset('i_y_s.png') }}');
+  background-repeat: no-repeat;
+  background-size: 700px auto;
+  background-position: top -40px left;
+}
+
+
+  /* SOBRE */
+  .celebrate .sobre {
+  width: 85%;
+  max-width: 400px;
+
+  transform: translate(-60px, -80px) !important;
+}
+  /* FOTO */
+  .celebrate .foto {
+  width: 85%;
+  max-width: 260px;
+
+  transform: translate(-20px, -380px) !important;
+
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+}
+
+
+  /* TEXTO CURSIVO (VERSÍCULO) */
+.celebrate .versiculo {
+  width: 200% !important;
+  max-width: 1000px !important;
+  margin-left: 95% !important;
+  margin-top: -1200px !important;
+  transform: scale(1.15) !important;
+}
+
+
+
+
+  /* TEXTO NORMAL (AGRADECIMIENTO) */
+.celebrate .agradecimiento {
+  width: 150% !important;
+  max-width: 900px !important;
+
+  position: relative;
+  left: 30%;
+
+  transform: translate(-75%, -200px) scale(1.2) !important; /* 👈 AQUÍ SUBE */
+}
+
+
+
+  /* TE ESPERAMOS */
+  .celebrate .te-esperamos {
+    width: 80%;
+    max-width: 260px;
+    margin: 30px auto 0;
+  }
+  
+/* ================= UBICACIÓN ================= */
+.ubication {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  overflow: visible !important; /* 🔥 CLAVE */
+  min-height: auto !important;
+  padding-top: 0 !important;
+}
+
+/* IMAGEN PRINCIPAL FULL WIDTH */
+.foto-propuesta {
+  width: 180vw;          /* 👈 MÁS ancha por ambos lados */
+  max-width: none;
+  height: auto;
+
+  position: relative;
+  left: 50%;             /* 👈 centra respecto a la pantalla */
+  transform: translateX(-10%); /* 👈 reparte el ancho a ambos lados */
+
+  margin: 0;
+  display: block;
+}
+
+
+/* IMÁGENES TEXTO */
+.nos-casaremos,
+.nh-quinta {
+  width: 200% !important;
+  max-width: 600px !important;
+  text-align: center;
+  margin-left: -80px !important;  /* 👈 ESTO CENTRA */
+  margin-right: auto !important; /* 👈 ESTO CENTRA */
+}
+
+/* 👇 SUBE ESTE */
+/* 👇 SUBE ESTE */
+.nos-casaremos {
+  margin-top: -30px !important;
+}
+
+/* 👇 ESTE SE QUEDA NORMAL */
+.nh-quinta {
+  position: relative !important;
+  transform: translateY(-480px)  translateX(-50px) !important; /* 👈 SUBE SIN AFECTAR EL FLUJO */
+  z-index: 10 !important;
+}
+
+.mapa-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative !important;
+  z-index: 1 !important;
+  margin-top: -800px !important; /* 👈 SUBE EL MAPA */
+}
+
+.mapa-wrap iframe {
+  width: 85% !important;
+  max-width: 500px !important;
+  height: 220px !important;
+  border-radius: 12px;
+}
+
+  /* ================= DAY ================= */
+ /* ================= DAY ================= */
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 60px;
+}
+
+.day-title-img {
+  width: 150%;
+  max-width: 700px;
+  margin: 0 auto 40px; /* 👈 Ya está centrado con "auto" */
+  display: block; /* 👈 AGREGA ESTO */
+  margin-left: -80px !important; /* 👈 FUERZA EL CENTRADO */
+  margin-right: auto !important; /* 👈 FUERZA EL CENTRADO */
+}
+
+
+
+.eventos-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  margin-top: -400px;
+  width: 100%;
+  margin-left: -30px !important; /* 👈 MISMO VALOR que day-title */
+  margin-right: auto !important;
+}
+
+.evento {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: -30px; /* 👈 SUBE CADA EVENTO */
+}
+
+/* ÍCONO EVENTO */
+.evento-icon {
+  width: 200px !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  margin-top: -20px !important; /* 👈 SUBE EL ÍCONO */
+}
+
+/* INFO EVENTO */
+.evento-info {
+  width: 90% !important;
+  max-width: 300px !important;
+  margin: -40px auto 0 !important; /* 👈 ACERCA EL TEXTO AL ÍCONO (cambié de -400 a -40) */
+  text-align: center;
+}
+
+/* ================= DRESS CODE ================= */
+.dress-code-section {
+  width: 100% !important;
+  height: 180px !important; /* 👈 Altura FIJA en píxeles */
+  background-color: #8b8680;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  padding: 20px 20px !important;
+  margin-top: 60px !important;
+  position: relative !important;
+  overflow: hidden !important; /* 👈 CLAVE: Oculta lo que sobresalga */
+}
+
+.dress-code-img {
+  width: 200% !important;
+  max-width: 900px !important;
+  margin: 0 auto 20px auto !important;
+  position: relative !important;
+  left: -50px !important;
+  top: -300px !important;
+}
+
+.no-blanco-img {
+  width: 150% !important;
+  max-width: 700px !important;
+  margin: 0 auto !important;
+  position: relative !important;
+  left: 0 !important;
+  top: -910px !important;
+}
+
+
+ /* ================= GIFTS ================= */
+.gifts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100%;
+  height: 60vh;
+  background-color: black;
+
+  padding: 60px 20px;
+  margin-top: -150px !important;  /* 👈 SUBE PARA TAPAR EL HUECO BLANCO */
+  gap: 30px;
+  
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+}
+
+/* Contenido centrado */
+.gifts-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+
+.mesa-regalos-title {
+  width: 200%;
+  max-width: 1200px;
+  position: relative;
+  left: 10%;
+  transform: translateX(30%) translateY(-20%);
+}
+
+
+.selecciona-text {
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  margin: 10px 0;
+  transform: translateX(-20px) translateY(-600px);
+}
+
+.logos-tiendas {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 30px;
+  transform: translateX(-20px) translateY(-580px);
+}
+
+
+.logos-tiendas img {
+  max-width: 140px;
+  height: auto;
+}
+
+/* IMAGEN DE MANO - LLENA EL ESPACIO */
+.foto-mano {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 45% !important;
+  transform: translateX(-50%) translateY(-2%) !important;
+  
+  width: 100% !important;
+  height: 400px !important;
+  
+  background-size: cover !important;
+  background-position: center bottom !important;
+  background-repeat: no-repeat !important;
+  
+  opacity: 0.4 !important;
+  z-index: 1 !important;
+}
+  /* ================= CONFIRMATION ================= */
+.confirmation {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 60px 20px 120px; /* 👈 MUCHO MÁS CHICA */
+  height: 75vh;            /* 👈 ALTUTA REAL */
+  max-height: 75vh;        /* 👈 BLOQUEO */
+  min-height: unset !important; /* 👈 CLAVE */
+
+  overflow: hidden;
+  text-align: center;
+}
+
+
+  /* CONTENIDO */
+  .confirmation-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+
+    padding: 0;
+    width: 100%;
+    max-width: 360px;
+    z-index: 2;
+  }
+
+  /* IMÁGENES TEXTO */
+  .queremos-title {
+    width: 200%;
+    max-width: 1000px;
+    transform: translateX(17%) translateY(-10%) !important;
+  }
+
+  .confirma-text {
+    width: 200%;
+    max-width: 700px;
+    margin: 0;
+    transform: translateX(30%) translateY(-110%) !important;
+  }
+
+  /* BOTÓN RSVP */
+  .boton-rsvp {
+    width: 600px;
+    margin: 10px auto 0;
+    transform: translateX(12%) translateY(-230%) !important;
+  }
+
+  /* FORM RSVP */
+  #rsvpForm {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+
+    width: 100%;
+    max-width: 200px;
+    margin: 20px auto 0;
+    transform:  translateX(-7%)  translateY(-390%) !important;
+    z-index: 5;
+  }
+
+ .flores-confirmation {
+  position: absolute !important;
+
+  bottom: 0;          /* 🔒 JAMÁS SE MUEVE */
+  left: -160px;
+
+  width: 130%;
+  height: 28vh;       /* 👈 MÁS CHICAS */
+
+  z-index: 1;
+
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  pointer-events: none;
+}
+
+
+
+
+/* ===== WAITING MOBILE ===== */
+  .waiting {
+    position: relative;
+    width: 100%;
+    min-height: 100vh; /* 🔥 CLAVE */
+
+    background: linear-gradient(
+                rgba(0,0,0,0.45),
+                rgba(0,0,0,0.45)
+              ),
+              url('{{ asset('foto_beso.png') }}') center/cover no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    overflow: hidden;
+  }
+/* FOOTER */
+ .waiting-footer {
+    width: 100%;
+    background-color: black;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    padding: 30px 20px;
+    height: auto;        /* 👈 NO más gigante */
+    max-height: 45vh;    /* 🔥 NO puede tapar todo */
+  }
+
+  .waiting-left,
+  .waiting-right {
+    position: static !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .te-esperamos-final {
+    width: 90%;
+    max-width: 320px;
+  }
+
+  .nombre-firma {
+    width: 85%;
+    max-width: 300px;
+  }
+
+  .contacto-img {
+    width: 70%;
+    max-width: 240px;
+    margin-top: 10px;
+  }
+}
+
+
+}
+
+
+/* CSS para los toasts */
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 320px;
+  pointer-events: none;
+}
+
+.toast {
+  background-color: #333;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  font-family: 'Georgia', serif;
+  font-size: 16px;
+  opacity: 0;
+  transform: translateX(100%);
+  animation: slideIn 0.5s forwards, fadeOut 0.5s 3.5s forwards;
+  pointer-events: auto;
+}
+
+.toast-success {
+  background-color: #4CAF50;
+}
+
+.toast-error {
+  background-color: #F44336;
+}
+
+.toast-info {
+  background-color: #2196F3;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+
 </style>
 </head>
 
@@ -769,9 +1467,18 @@ html, body {
     <img src="{{ asset('queremos.png') }}" class="queremos-title" alt="Queremos que seas parte">
     <img src="{{ asset('confirma.png') }}" class="confirma-text" alt="Confirma tu asistencia">
     
-    <a href="URL_DE_TU_FORMULARIO" target="_blank">
-      <img src="{{ asset('boton.png') }}" class="boton-rsvp" alt="Boton RSVP">
-    </a>
+   <img src="{{ asset('boton.png') }}" class="boton-rsvp" id="btnRSVP" alt="Boton RSVP">
+
+    <div id="rsvpForm" style="display:none; margin-top:20px;">
+      <select id="invitados">
+        <option value="">Selecciona tu nombre</option>
+      </select>
+
+      <input type="number" id="numero" min="0">
+
+      <button id="btnConfirmar">Confirmar asistencia</button>
+      <button id="btnNoAsistire">No asistiré</button>
+    </div>
   </div>
 
   <div class="flores-confirmation"></div>
@@ -792,7 +1499,30 @@ html, body {
   </div>
 </section>
 
+<div id="toast-container"></div>
+
+<audio src="{{asset('cancion_boda.mp3')}}" autoplay loop></audio>
+
+
 <script>
+  const sections = document.querySelectorAll(
+    '.hero, .celebrate, .ubication, .day, .gifts, .confirmation, .waiting'
+  );
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('section-visible');
+        }
+      });
+    },
+    {
+      threshold: 0.25
+    }
+  );
+
+  sections.forEach(section => observer.observe(section));
 var end = new Date('03/14/2026 5:00 PM');
 
     var _second = 1000;
@@ -822,6 +1552,128 @@ var end = new Date('03/14/2026 5:00 PM');
     }
 
     timer = setInterval(showRemaining, 1000);
+
+  function showToast(message, type = 'info') {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  toast.classList.add('toast', `toast-${type}`);
+  toast.textContent = message;
+
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 4000);
+}
+
+    //invitados
+    // invitados
+const btnRSVP = document.getElementById('btnRSVP');
+const form = document.getElementById('rsvpForm');
+const selectInvitados = document.getElementById('invitados');
+const inputNumero = document.getElementById('numero');
+const btnConfirmar = document.getElementById('btnConfirmar');
+const btnNoAsistire = document.getElementById('btnNoAsistire');
+
+let invitadoSeleccionado = null;
+
+/* bloquear todo */
+function bloquearBotones() {
+  btnConfirmar.disabled = true;
+  btnNoAsistire.disabled = true;
+  selectInvitados.disabled = true;
+  inputNumero.disabled = true;
+}
+
+/* 1️⃣ Mostrar formulario y cargar invitados */
+btnRSVP.addEventListener('click', () => {
+  form.style.display = 'block';
+  btnRSVP.style.display = 'none';
+
+  fetch('http://127.0.0.1:8000/api/invitados')
+    .then(res => res.json())
+    .then(data => {
+      selectInvitados.innerHTML = '<option value="">Selecciona tu nombre</option>';
+      data.forEach(inv => {
+        selectInvitados.innerHTML += `
+          <option value="${inv.id}">${inv.familia}</option>
+        `;
+      });
+    });
+});
+
+/* 2️⃣ Al seleccionar invitado → obtener número contemplado */
+selectInvitados.addEventListener('change', () => {
+  invitadoSeleccionado = selectInvitados.value;
+  if (!invitadoSeleccionado) return;
+
+  fetch(`http://127.0.0.1:8000/api/numero/${invitadoSeleccionado}`)
+    .then(res => res.json())
+    .then(data => {
+      inputNumero.value = data.miembros_contemplados;
+      inputNumero.max = data.miembros_contemplados;
+    });
+});
+
+/* 3️⃣ No permitir aumentar invitados */
+inputNumero.addEventListener('input', () => {
+  const max = parseInt(inputNumero.max);
+  let valor = parseInt(inputNumero.value);
+
+  if (valor > max) inputNumero.value = max;
+  if (valor < 0 || isNaN(valor)) inputNumero.value = 0;
+});
+
+/* 4️⃣ Confirmar asistencia */
+btnConfirmar.addEventListener('click', () => {
+  if (!invitadoSeleccionado) return alert('Selecciona un invitado');
+
+  btnConfirmar.disabled = true;
+  btnNoAsistire.disabled = true;
+
+  fetch(`http://127.0.0.1:8000/api/confirmacion/${invitadoSeleccionado}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    },
+    body: JSON.stringify({
+      confirmacion: true,
+      miembros_confirmados: inputNumero.value
+    })
+  })
+  .then(() => {
+    showToast('Asistencia confirmada 🎉');
+    bloquearBotones();
+  });
+});
+
+/* 5️⃣ No asistiré */
+btnNoAsistire.addEventListener('click', () => {
+  if (!invitadoSeleccionado) return alert('Selecciona un invitado');
+
+  btnConfirmar.disabled = true;
+  btnNoAsistire.disabled = true;
+
+  fetch(`http://127.0.0.1:8000/api/no-confirmacion/${invitadoSeleccionado}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    },
+    body: JSON.stringify({
+      confirmacion: false,
+      miembros_confirmados: 0
+    })
+  })
+  .then(() => {
+    showToast('Gracias por avisar ❤️');
+    bloquearBotones();
+  });
+});
+
 </script>
 </body>
 </html>

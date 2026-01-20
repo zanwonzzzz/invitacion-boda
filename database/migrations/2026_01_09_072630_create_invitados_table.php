@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('miembros_contemplados');
             $table->boolean('invitacion_enviada')->nullable();
             $table->boolean('confirmacion')->nullable();
+            $table->integer('miembros_confirmados')->nullable();
             $table->text('notas')->nullable();
             $table->text('contacto');
             $table->timestamps();

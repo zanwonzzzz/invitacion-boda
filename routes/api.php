@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\InvitadosController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+ 
+Route::get('/invitados', [InvitadosController::class, 'Invitados']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/numero/{id}', [InvitadosController::class, 'NumeroContemplados']);
+
+Route::put('/confirmacion/{id}', [InvitadosController::class, 'Confirmacion']);
+
+Route::put('/no-confirmacion/{id}', [InvitadosController::class, 'NoAsistencia']);
