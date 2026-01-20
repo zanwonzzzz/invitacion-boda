@@ -990,6 +990,7 @@ section,
   max-width: 500px !important;
   height: 220px !important;
   border-radius: 12px;
+  margin-bottom: 50px;
 }
 
   /* ================= DAY ================= */
@@ -1248,95 +1249,140 @@ section,
 
 
 
-/* ===== WAITING MOBILE ===== */
-  .waiting {
-    position: relative;
-    width: 100%;
-    min-height: 100vh; /* 🔥 CLAVE */
+.waiting {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 100vh !important;
+  background: black !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
 
-    background: linear-gradient(
-                rgba(0,0,0,0.45),
-                rgba(0,0,0,0.45)
-              ),
-              url('{{ asset('foto_beso.png') }}') center/cover no-repeat;
+.waiting::before {
+  content: "" !important;
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  height: 40vh !important;
+  background-image: url('{{ asset('foto_beso.png') }}') !important;
+  background-position: center -40px !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  z-index: 1 !important;
+}
 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+.waiting-footer {
+  position: relative !important;
+  z-index: 10 !important;
+  width: 100% !important;
+  height: auto !important;
+  background-color: black !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 20px !important;
+  padding: 30px 20px !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
 
-    overflow: hidden;
-  }
-/* FOOTER */
- .waiting-footer {
-    width: 100%;
-    background-color: black;
+.waiting-left,
+.waiting-right {
+  position: relative !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  z-index: 20 !important;
+  margin: 0 !important; /* Cero margenes */
+  padding: 0 !important;
+}
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+.waiting-left .te-esperamos-final {
+  width: 200% !important;
+  max-width: 800px !important;
+  height: auto !important;
+  display: block !important;
+  visibility: visible !important;
+  margin: 0 auto 10px auto !important; /* Sin margen arriba, solo abajo */
+  position: relative !important;
+  top: -800px !important; /* Sube la imagen */
+  left: 30% !important;
+  transform: translateX(-10%) !important; /* Centra horizontalmente */
+  right: auto !important;
+  bottom: auto !important;
+}
 
-    padding: 30px 20px;
-    height: auto;        /* 👈 NO más gigante */
-    max-height: 45vh;    /* 🔥 NO puede tapar todo */
-  }
+.waiting-right .nombre-firma{
+  width: 150% !important;
+  max-width: 600px !important;
+  height: auto !important;
+  display: block !important;
+  visibility: visible !important;
+  margin: 0 auto 10px auto !important; /* Sin margen arriba, solo abajo */
+  position: relative !important;
+  top: -1350px !important; /* Sube ambas imágenes */
+  left: 50% !important;
+  transform: translateX(-50%) !important; /* Centrado horizontal */
+  right: auto !important;
+  bottom: auto !important;
+}
 
-  .waiting-left,
-  .waiting-right {
-    position: static !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .te-esperamos-final {
-    width: 90%;
-    max-width: 320px;
-  }
-
-  .nombre-firma {
-    width: 85%;
-    max-width: 300px;
-  }
-
-  .contacto-img {
-    width: 70%;
-    max-width: 240px;
-    margin-top: 10px;
-  }
+.waiting-right .contacto-img {
+  width: 150% !important;
+  max-width: 600px !important;
+  height: auto !important;
+  display: block !important;
+  visibility: visible !important;
+  margin: 0 auto 10px auto !important; /* Sin margen arriba, solo abajo */
+  position: relative !important;
+  top: -1750px !important; /* Sube ambas imágenes */
+  left: 50% !important;
+  transform: translateX(-50%) !important; /* Centrado horizontal */
+  right: auto !important;
+  bottom: auto !important;
 }
 
 
 }
 
 
-/* CSS para los toasts */
 #toast-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 9999;
+  position: fixed !important; /* 👈 Obligatorio para que ignore el diseño de la página */
+  top: 30px !important;      /* 👈 Lo sube al borde superior */
+  right: 20px !important;    /* 👈 Lo pega a la derecha */
+  width: 300px;
+  z-index: 999999 !important; /* 👈 Por encima de TODO */
+  
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 320px;
-  pointer-events: none;
+  pointer-events: none; 
 }
 
 .toast {
-  background-color: #333;
+  /* El toast individual sí debe permitir clicks si fuera necesario */
+  pointer-events: auto; 
+  background-color: rgba(51, 51, 51, 0.95);
   color: white;
-  padding: 14px 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  padding: 12px 15px;
+  border-radius: 10px;
   font-family: 'Georgia', serif;
-  font-size: 16px;
+  font-size: 14px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  
+  /* Animación suave */
   opacity: 0;
-  transform: translateX(100%);
-  animation: slideIn 0.5s forwards, fadeOut 0.5s 3.5s forwards;
-  pointer-events: auto;
+  transform: translateX(20px);
+  animation: slideIn 0.4s forwards, fadeOut 0.4s 3.5s forwards;
 }
-
 .toast-success {
   background-color: #4CAF50;
 }
@@ -1364,11 +1410,33 @@ section,
 }
 
 
-</style>
+/* ===== AL FINAL, DESPUÉS DE TODOS LOS @media ===== */
+
+/* Eliminar espacios en blanco globales */
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+html {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Asegurar que waiting sea la última sección sin espacios */
+.waiting:last-child {
+    margin-bottom: 0 !important;
+}
+
+section:last-of-type {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+</style> 
 </head>
 
 <body>
-
 <section class="hero">
   <img src="{{ asset('Diseño sin título.png') }}"
        class="names"
@@ -1482,6 +1550,9 @@ section,
   </div>
 
   <div class="flores-confirmation"></div>
+  
+  
+<div id="toast-container"></div>
 </section>
 
 <section class="waiting">
@@ -1499,12 +1570,22 @@ section,
   </div>
 </section>
 
-<div id="toast-container"></div>
 
-<audio src="{{asset('cancion_boda.mp3')}}" autoplay loop></audio>
+
+<audio id="miMusica" loop>
+    <source src="{{ asset('cancion_boda.mp3') }}" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+</audio>
 
 
 <script>
+  document.addEventListener('click', function() {
+        var audio = document.getElementById('miMusica');
+        audio.play().catch(function(error) {
+            console.log("El navegador bloqueó el autoplay inicialmente:", error);
+        });
+    }, { once: true });
+    
   const sections = document.querySelectorAll(
     '.hero, .celebrate, .ubication, .day, .gifts, .confirmation, .waiting'
   );
@@ -1565,7 +1646,7 @@ var end = new Date('03/14/2026 5:00 PM');
 
   setTimeout(() => {
     toast.remove();
-  }, 4000);
+  }, 4500);
 }
 
     //invitados
@@ -1592,7 +1673,7 @@ btnRSVP.addEventListener('click', () => {
   form.style.display = 'block';
   btnRSVP.style.display = 'none';
 
-  fetch('http://127.0.0.1:8000/api/invitados')
+  fetch('https://myweeding.website/api/invitados')
     .then(res => res.json())
     .then(data => {
       selectInvitados.innerHTML = '<option value="">Selecciona tu nombre</option>';
@@ -1609,7 +1690,7 @@ selectInvitados.addEventListener('change', () => {
   invitadoSeleccionado = selectInvitados.value;
   if (!invitadoSeleccionado) return;
 
-  fetch(`http://127.0.0.1:8000/api/numero/${invitadoSeleccionado}`)
+  fetch(`https://myweeding.website/api/numero/${invitadoSeleccionado}`)
     .then(res => res.json())
     .then(data => {
       inputNumero.value = data.miembros_contemplados;
@@ -1628,12 +1709,12 @@ inputNumero.addEventListener('input', () => {
 
 /* 4️⃣ Confirmar asistencia */
 btnConfirmar.addEventListener('click', () => {
-  if (!invitadoSeleccionado) return alert('Selecciona un invitado');
+  if (!invitadoSeleccionado) return showToast('Selecciona un invitado','error');
 
   btnConfirmar.disabled = true;
   btnNoAsistire.disabled = true;
 
-  fetch(`http://127.0.0.1:8000/api/confirmacion/${invitadoSeleccionado}`, {
+  fetch(`https://myweeding.website/api/confirmacion/${invitadoSeleccionado}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -1645,19 +1726,19 @@ btnConfirmar.addEventListener('click', () => {
     })
   })
   .then(() => {
-    showToast('Asistencia confirmada 🎉');
+    showToast('Asistencia confirmada 🎉','success');
     bloquearBotones();
   });
 });
 
 /* 5️⃣ No asistiré */
 btnNoAsistire.addEventListener('click', () => {
-  if (!invitadoSeleccionado) return alert('Selecciona un invitado');
+  if (!invitadoSeleccionado) return showToast('Selecciona un invitado','error');
 
   btnConfirmar.disabled = true;
   btnNoAsistire.disabled = true;
 
-  fetch(`http://127.0.0.1:8000/api/no-confirmacion/${invitadoSeleccionado}`, {
+  fetch(`https://myweeding.website/api/no-confirmacion/${invitadoSeleccionado}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -1669,7 +1750,7 @@ btnNoAsistire.addEventListener('click', () => {
     })
   })
   .then(() => {
-    showToast('Gracias por avisar ❤️');
+    showToast('Gracias por avisar ❤️','success');
     bloquearBotones();
   });
 });
