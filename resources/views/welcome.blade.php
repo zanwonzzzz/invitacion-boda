@@ -1360,7 +1360,7 @@ section,
   width: 200% !important;
   max-width: 1000px !important;
   margin-left: 95% !important;
-  margin-top: -1000px !important;
+  margin-top: -1200px !important;
   transform: scale(1.15) !important;
 }
 }
