@@ -1079,7 +1079,7 @@ section,
   margin: 0 auto !important;
   position: relative !important;
   left: 0 !important;
-  top: -860px !important;
+  top: -890px !important;
 }
 
 
@@ -1354,6 +1354,79 @@ section,
 
 
 }
+
+@media (max-width: 430px) and (min-height: 820px) {
+  .no-blanco-img {
+    top: -860px !important;
+  }
+
+  .celebrate .sobre {
+    width: 85%;
+    max-width: 400px;
+
+    transform: translate(-60px, -120px) !important;
+  }
+}
+
+@media (max-width: 412px) and (min-height: 780px) {
+  .no-blanco-img {
+  top: -900px !important;
+}
+.waiting-right .nombre-firma{
+  top: -1360px !important; 
+}
+.waiting-right .contacto-img {
+  top: -1790px !important;
+}
+}
+
+@media (max-width: 360px) and (min-height: 740px) {
+    /* FOTO */
+  .celebrate .foto {
+  width: 85%;
+  max-width: 260px;
+
+  transform: translate(-20px, -350px) !important;
+
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+}
+
+
+  /* TEXTO CURSIVO (VERSÍCULO) */
+.celebrate .versiculo {
+  width: 200% !important;
+  max-width: 1000px !important;
+  margin-left: 95% !important;
+  margin-top: -980px !important;
+  transform: scale(1.15) !important;
+}
+
+ .celebrate .sobre {
+    width: 85%;
+    max-width: 400px;
+
+    transform: translate(-60px, -120px) !important;
+  }
+   
+.no-blanco-img {
+  top: -790px !important;
+}
+
+.dress-code-img {
+  top: -260px !important;
+}
+
+.waiting-right .nombre-firma{
+  top: -1280px !important; 
+}
+.waiting-right .contacto-img {
+  top: -1650px !important;
+}
+}
+
+
+
+
 
 
 
