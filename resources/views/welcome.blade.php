@@ -1355,6 +1355,9 @@ section,
 
 }
 
+
+
+
 @media (max-width: 430px) and (min-height: 820px) {
   .no-blanco-img {
     top: -860px !important;
@@ -1364,8 +1367,16 @@ section,
     width: 85%;
     max-width: 400px;
 
-    transform: translate(-60px, -120px) !important;
+    transform: translate(-60px, -130px) !important;
   }
+
+  .celebrate .versiculo {
+  width: 200% !important;
+  max-width: 1000px !important;
+  margin-left: 95% !important;
+  margin-top: -1300px !important;
+  transform: scale(1.15) !important;
+}
 }
 
 @media (max-width: 412px) and (min-height: 780px) {
@@ -1423,6 +1434,7 @@ section,
   top: -1650px !important;
 }
 }
+
 
 
 
