@@ -1355,6 +1355,15 @@ section,
 
 }
 
+@media (max-width: 428px) and (min-height: 926px){
+  .celebrate .versiculo {
+  width: 200% !important;
+  max-width: 1000px !important;
+  margin-left: 95% !important;
+  margin-top: -980px !important;
+  transform: scale(1.15) !important;
+}
+}
 
 
 
