@@ -760,6 +760,8 @@ section,
   }
 }
 
+
+
 /*celular */
 /* ================================
    📱 MOBILE CSS LIMPIO Y REAL
@@ -815,7 +817,7 @@ section,
     max-width: 90vw;
 
     /* 👇 mueve a la derecha */
-    margin-left: 60px;   /* prueba 15px – 30px */
+    margin-left: 40px;   /* prueba 15px – 30px */
 
     position: relative !important;
     left: 0 !important;
@@ -899,7 +901,7 @@ section,
   width: 200% !important;
   max-width: 1000px !important;
   margin-left: 95% !important;
-  margin-top: -1200px !important;
+  margin-top: -1100px !important;
   transform: scale(1.15) !important;
 }
 
@@ -914,7 +916,7 @@ section,
   position: relative;
   left: 30%;
 
-  transform: translate(-75%, -200px) scale(1.2) !important; /* 👈 AQUÍ SUBE */
+  transform: translate(-75%, -100px) scale(1.2) !important; /* 👈 AQUÍ SUBE */
 }
 
 
@@ -973,7 +975,7 @@ section,
 .nh-quinta {
   position: relative !important;
   transform: translateY(-480px)  translateX(-50px) !important; /* 👈 SUBE SIN AFECTAR EL FLUJO */
-  z-index: 10 !important;
+  z-index: 0;
 }
 
 .mapa-wrap {
@@ -1003,11 +1005,11 @@ section,
 }
 
 .day-title-img {
-  width: 150%;
-  max-width: 700px;
+  width: 200%;
+  max-width: 900px;
   margin: 0 auto 40px; /* 👈 Ya está centrado con "auto" */
   display: block; /* 👈 AGREGA ESTO */
-  margin-left: -80px !important; /* 👈 FUERZA EL CENTRADO */
+  margin-left: -150px !important; /* 👈 FUERZA EL CENTRADO */
   margin-right: auto !important; /* 👈 FUERZA EL CENTRADO */
 }
 
@@ -1029,12 +1031,12 @@ section,
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: -30px; /* 👈 SUBE CADA EVENTO */
+  margin-top: -140px; /* 👈 SUBE CADA EVENTO */
 }
 
 /* ÍCONO EVENTO */
 .evento-icon {
-  width: 200px !important;
+  width: 300px !important;
   height: auto !important;
   margin: 0 auto !important;
   margin-top: -20px !important; /* 👈 SUBE EL ÍCONO */
@@ -1044,7 +1046,7 @@ section,
 .evento-info {
   width: 90% !important;
   max-width: 300px !important;
-  margin: -40px auto 0 !important; /* 👈 ACERCA EL TEXTO AL ÍCONO (cambié de -400 a -40) */
+  margin: -100px auto 0 !important; /* 👈 ACERCA EL TEXTO AL ÍCONO (cambié de -400 a -40) */
   text-align: center;
 }
 
@@ -1068,7 +1070,7 @@ section,
   margin: 0 auto 20px auto !important;
   position: relative !important;
   left: -50px !important;
-  top: -300px !important;
+  top: -280px !important;
 }
 
 .no-blanco-img {
@@ -1077,7 +1079,7 @@ section,
   margin: 0 auto !important;
   position: relative !important;
   left: 0 !important;
-  top: -910px !important;
+  top: -890px !important;
 }
 
 
