@@ -1079,7 +1079,7 @@ section,
   margin: 0 auto !important;
   position: relative !important;
   left: 0 !important;
-  top: -890px !important;
+  top: -870px !important;
 }
 
 
@@ -1354,6 +1354,7 @@ section,
 
 
 }
+
 
 
 #toast-container {
