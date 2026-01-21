@@ -1079,7 +1079,7 @@ section,
   margin: 0 auto !important;
   position: relative !important;
   left: 0 !important;
-  top: -870px !important;
+  top: -860px !important;
 }
 
 
